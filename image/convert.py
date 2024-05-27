@@ -2,6 +2,20 @@ import numpy as np
 import torch
 
 
+def float2int(t: torch.Tensor | np.ndarray) -> torch.Tensor | np.ndarray:
+    """
+    Convert float tensor to int tensor
+
+    Args:
+        t: Float tensor to convert to int
+
+    Returns:
+        Converted tensor
+    """
+    t = t.round()
+    return t.to(torch.int32) if isinstance(t, torch.Tensor) else t.astype(np.int32)
+
+
 def convert_range_to_range(
     value: torch.Tensor | np.ndarray,
     old_min: float,
@@ -36,7 +50,7 @@ def convert_range_to_range_int(
     Scale integers to new range
     """
     adjusted = ((value - old_min) / (old_max - old_min)) * (new_max - new_min) + new_min
-    return adjusted.round().to(torch.int32)
+    return float2int(adjusted)
 
 
 def np2torch(np_img: np.ndarray) -> torch.Tensor:

@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Tuple
 
 import cv2
 import numpy as np
@@ -58,7 +58,7 @@ class MeanShift:
     RETURN_TYPES = ("IMAGE", "IMAGE", "IMAGE")
     RETURN_NAMES = ("image", "label_image", "lut")
     FUNCTION = "meanshift"
-    CATEGORY = "Mosaica/Meanshift"
+    CATEGORY = "Mosaica/Analyze"
 
     def meanshift(
         self,
@@ -67,7 +67,7 @@ class MeanShift:
         color_space: Literal["RGB", "LAB"],
         use_pixel_distance: str,
         max_iter: int,
-    ) -> tuple:
+    ) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         """
         Perform MeanShift clustering on an image
 

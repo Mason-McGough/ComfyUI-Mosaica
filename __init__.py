@@ -1,4 +1,5 @@
 from .analyze.meanshift import MeanShift
+from .analyze.watershed import Watershed
 from .lut.apply import ApplyLUTToLabelImage
 from .lut.matplotlib import LoadLUTFromMatplotlib
 from .lut.random import RandomLUT
@@ -7,6 +8,7 @@ from .lut.random import RandomLUT
 # NOTE: names should be globally unique
 NODE_CLASS_MAPPINGS = {
     "MeanShift": MeanShift,
+    "Watershed": Watershed,
     "ApplyLUTToLabelImage": ApplyLUTToLabelImage,
     "RandomLUT": RandomLUT,
     "LoadLUTFromMatplotlib": LoadLUTFromMatplotlib,
@@ -15,6 +17,7 @@ NODE_CLASS_MAPPINGS = {
 # A dictionary that contains the friendly/humanly readable titles for the nodes
 NODE_DISPLAY_NAME_MAPPINGS = {
     "MeanShift": "Mean Shift",
+    "Watershed": "Watershed",
     "ApplyLUTToLabelImage": "Apply LUT To Label Image",
     "RandomLUT": "Random LUT",
     "LoadLUTFromMatplotlib": "Load LUT From Matplotlib",

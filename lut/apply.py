@@ -1,3 +1,5 @@
+from typing import Tuple
+
 import torch
 
 from ..image.convert import convert_range_to_range_int
@@ -35,7 +37,7 @@ class ApplyLUTToLabelImage:
         label_image: torch.Tensor,
         lut: torch.Tensor,
         scale_labels_to_lut_range: bool,
-    ) -> torch.Tensor:
+    ) -> Tuple[torch.Tensor]:
         """
         Apply lookup table to label image
 

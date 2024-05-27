@@ -1,3 +1,5 @@
+from typing import Tuple
+
 import torch
 from matplotlib import colormaps, colors
 
@@ -26,7 +28,7 @@ class LoadLUTFromMatplotlib:
     FUNCTION = "load_lut_from_matplotlib"
     CATEGORY = "Mosaica/LUT"
 
-    def load_lut_from_matplotlib(self, colormap: str) -> torch.Tensor:
+    def load_lut_from_matplotlib(self, colormap: str) -> Tuple[torch.Tensor]:
         """
         Load a Look-Up Table (LUT) from matplotlib colormaps
 

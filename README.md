@@ -10,6 +10,12 @@ Generate an image using a stable diffusion model and apply the [mean shift clust
 
 ![mean-shift-example](https://github.com/Mason-McGough/ComfyUI-Mosaica/blob/main/workflows/mean-shift-example.png)
 
+### Watershed
+
+Generate an image using a stable diffusion model and apply the [watershed segmentation algorithm](https://docs.opencv.org/4.x/d3/d47/group__imgproc__segmentation.html) to convert it to a label image. The average color of each cluster is applied to the image's labels and a colorized image is returned.
+
+![watershed-example](https://github.com/Mason-McGough/ComfyUI-Mosaica/blob/main/workflows/watershed-example.png)
+
 ### Random LUT
 
 Apply a randomly generated lookup table of RGB colors to colorize the label image from the mean shift clustering node.
@@ -40,7 +46,7 @@ Apply an img2img with light denoising to the colorized label image.
 - [ ] implement `LoadLUTFromFile` node
 - [ ] implement `MedianFilter` node
 - [ ] implement `KMeans` node
-- [ ] implement `Watershed` node
+- [x] implement `Watershed` node
 - [ ] implement `Resize Label Image` node
 - [ ] add support for Segment Anything labels
 - [ ] write unit tests

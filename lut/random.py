@@ -1,3 +1,5 @@
+from typing import Tuple
+
 import torch
 
 
@@ -27,7 +29,7 @@ class RandomLUT:
     FUNCTION = "random_lut"
     CATEGORY = "Mosaica/LUT"
 
-    def random_lut(self, num_rows: int) -> torch.Tensor:
+    def random_lut(self, num_rows: int) -> Tuple[torch.Tensor]:
         """
         Generate a random Look-Up Table (LUT) of RGB colors
 
