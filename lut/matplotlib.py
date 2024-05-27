@@ -24,7 +24,7 @@ class LoadLUTFromMatplotlib:
     RETURN_TYPES = ("IMAGE",)
     RETURN_NAMES = ("lut",)
     FUNCTION = "load_lut_from_matplotlib"
-    CATEGORY = "ComfyUI-HorseTools/LUT"
+    CATEGORY = "Mosaica/LUT"
 
     def load_lut_from_matplotlib(self, colormap: str) -> torch.Tensor:
         """

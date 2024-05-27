@@ -58,7 +58,7 @@ class MeanShift:
     RETURN_TYPES = ("IMAGE", "IMAGE", "IMAGE")
     RETURN_NAMES = ("image", "label_image", "lut")
     FUNCTION = "meanshift"
-    CATEGORY = "ComfyUI-HorseTools/Meanshift"
+    CATEGORY = "Mosaica/Meanshift"
 
     def meanshift(
         self,

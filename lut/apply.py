@@ -28,7 +28,7 @@ class ApplyLUTToLabelImage:
     RETURN_TYPES = ("IMAGE",)
     RETURN_NAMES = ("image",)
     FUNCTION = "apply_lut_to_label_image"
-    CATEGORY = "ComfyUI-HorseTools/LUT"
+    CATEGORY = "Mosaica/LUT"
 
     def apply_lut_to_label_image(
         self,

@@ -42,6 +42,7 @@ Apply an img2img with light denoising to the colorized label image.
 - [ ] implement `KMeans` node
 - [ ] implement `Watershed` node
 - [ ] implement `Resize Label Image` node
+- [ ] add support for Segment Anything labels
 - [ ] write unit tests
 - [ ] use LAB space in RandomLUT for better perceptual uniformity
 - [ ] add random seed option to `RandomLUT`

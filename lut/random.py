@@ -25,7 +25,7 @@ class RandomLUT:
 
     RETURN_TYPES = ("IMAGE",)
     FUNCTION = "random_lut"
-    CATEGORY = "ComfyUI-HorseTools/LUT"
+    CATEGORY = "Mosaica/LUT"
 
     def random_lut(self, num_rows: int) -> torch.Tensor:
         """
