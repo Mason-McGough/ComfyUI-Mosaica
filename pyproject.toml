@@ -1,0 +1,14 @@
+[project]
+name = "ComfyUI-Mosaica"
+description = "Create colorful mosaic images in ComfyUI by computing label images and applying lookup tables."
+version = "0.1.0"
+license = "LICENSE"
+dependencies = ["matplotlib", "scikit-learn"]
+
+[project.urls]
+Repository = "https://github.com/Mason-McGough/ComfyUI-Mosaica"
+
+[tool.comfy]
+PublisherId = "Mason-McGough"
+DisplayName = "ComfyUI-Mosaica"
+Icon = "https://github.com/Mason-McGough/ComfyUI-Mosaica/blob/main/docs/mason-mcgough.png?raw=true"
