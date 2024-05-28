@@ -9,6 +9,6 @@ dependencies = ["matplotlib", "scikit-learn"]
 Repository = "https://github.com/Mason-McGough/ComfyUI-Mosaica"
 
 [tool.comfy]
-PublisherId = "Mason-McGough"
+PublisherId = "masonmcgough"
 DisplayName = "ComfyUI-Mosaica"
 Icon = "https://github.com/Mason-McGough/ComfyUI-Mosaica/blob/main/docs/mason-mcgough.png?raw=true"
