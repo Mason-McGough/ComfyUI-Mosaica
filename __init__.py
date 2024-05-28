@@ -1,3 +1,4 @@
+from .analyze.kmeans import KMeans
 from .analyze.meanshift import MeanShift
 from .analyze.watershed import Watershed
 from .lut.apply import ApplyLUTToLabelImage
@@ -7,6 +8,7 @@ from .lut.random import RandomLUT
 # A dictionary that contains all nodes you want to export with their names
 # NOTE: names should be globally unique
 NODE_CLASS_MAPPINGS = {
+    "KMeans": KMeans,
     "MeanShift": MeanShift,
     "Watershed": Watershed,
     "ApplyLUTToLabelImage": ApplyLUTToLabelImage,
@@ -16,6 +18,7 @@ NODE_CLASS_MAPPINGS = {
 
 # A dictionary that contains the friendly/humanly readable titles for the nodes
 NODE_DISPLAY_NAME_MAPPINGS = {
+    "KMeans": "KMeans",
     "MeanShift": "Mean Shift",
     "Watershed": "Watershed",
     "ApplyLUTToLabelImage": "Apply LUT To Label Image",

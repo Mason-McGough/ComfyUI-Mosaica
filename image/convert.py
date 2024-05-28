@@ -1,3 +1,6 @@
+from typing import Literal
+
+import cv2 as cv
 import numpy as np
 import torch
 
@@ -79,3 +82,31 @@ def torch2np(t_img: torch.Tensor) -> np.ndarray:
     """
     np_img = t_img.squeeze(0).cpu().numpy()
     return np_img
+
+
+def convert_to_normalized_colorspace(
+    image: np.ndarray,
+    color_space: Literal["RGB", "LAB"] = "RGB",
+) -> np.ndarray:
+    """
+    Convert image to normalized color space
+
+    Args:
+        image: Input floating point image in range [0, 1]
+        color_space: Color space to convert to. Either "RGB" or "LAB"
+
+    Returns:
+        Normalized image in range [-1, 1]
+
+    Raises:
+        ValueError: If invalid color space is provided
+    """
+    if color_space == "LAB":
+        norm_img = cv.cvtColor(image, cv.COLOR_RGB2LAB)
+        norm_img = convert_range_to_range(norm_img.astype(float), 0, 255, -1, 1)
+    elif color_space == "RGB":
+        norm_img = convert_range_to_range(image, 0, 1.0, -1.0, 1.0)
+    else:
+        raise ValueError(f"Invalid color space: {color_space}")
+
+    return norm_img

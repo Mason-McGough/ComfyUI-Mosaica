@@ -4,6 +4,12 @@ Create colorful mosaic images in [ComfyUI](https://github.com/comfyanonymous/Com
 
 ## Workflow Examples
 
+### K-Means
+
+Generate an image using a stable diffusion model and apply the [k-means clustering algorithm](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html) to convert it to a label image. The average color of each cluster is applied to the image's labels and a colorized image is returned.
+
+![kmeans-example](https://github.com/Mason-McGough/ComfyUI-Mosaica/blob/main/workflows/kmeans-example.png)
+
 ### Mean Shift
 
 Generate an image using a stable diffusion model and apply the [mean shift clustering algorithm](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.MeanShift.html) to convert it to a label image. The average color of each cluster is applied to the image's labels and a colorized image is returned.
@@ -45,7 +51,7 @@ Apply an img2img with light denoising to the colorized label image.
 
 - [ ] implement `LoadLUTFromFile` node
 - [ ] implement `MedianFilter` node
-- [ ] implement `KMeans` node
+- [x] implement `KMeans` node
 - [x] implement `Watershed` node
 - [ ] implement `Resize Label Image` node
 - [ ] add support for Segment Anything labels

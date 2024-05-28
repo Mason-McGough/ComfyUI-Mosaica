@@ -1,9 +1,9 @@
 from typing import Literal, Tuple
 
-import cv2
+import cv2 as cv
 import numpy as np
 import torch
-from sklearn.cluster import MeanShift as SklearnMeanShift
+from sklearn.cluster import KMeans as SklearnKMeans
 
 from ..analyze import add_pixel_distance_as_channels
 from ..image.convert import (
@@ -14,9 +14,9 @@ from ..image.convert import (
 )
 
 
-class MeanShift:
+class KMeans:
     """
-    MeanShift clustering algorithm for image segmentation
+    KMeans clustering algorithm for image segmentation
     """
 
     @classmethod
@@ -24,18 +24,18 @@ class MeanShift:
         """
         Return a dictionary which contains config for all input fields.
 
-        See: https://scikit-learn.org/stable/modules/generated/sklearn.cluster.MeanShift.html
+        See: https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html
         """
         return {
             "required": {
                 "image": ("IMAGE",),
-                "bandwidth": (
-                    "FLOAT",
+                "n_clusters": (
+                    "INT",
                     {
-                        "default": 0.1,
-                        "min": 0.0,
-                        "max": 1.0,
-                        "step": 0.01,
+                        "default": 8,
+                        "min": 1,
+                        "max": 100,
+                        "step": 1,
                         "display": "number",
                     },
                 ),
@@ -58,61 +58,44 @@ class MeanShift:
                         "display": "number",
                     },
                 ),
-            },
+            }
         }
 
     RETURN_TYPES = ("IMAGE", "IMAGE", "IMAGE")
     RETURN_NAMES = ("image", "label_image", "lut")
-    FUNCTION = "meanshift"
+    FUNCTION = "kmeans"
     CATEGORY = "Mosaica/Analyze"
 
-    def meanshift(
+    def kmeans(
         self,
         image: torch.Tensor,
-        bandwidth: float,
+        n_clusters: int,
         color_space: Literal["RGB", "LAB"],
         use_pixel_distance: str,
         max_iter: int,
     ) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
-        """
-        Perform MeanShift clustering on an image
-
-        Args:
-            image: Input image tensor from ComfyUI node
-            bandwidth: Bandwidth for the MeanShift algorithm. Higher values are faster but result
-                in fewer colors.
-            color_space: Color space to use for clustering. Either "RGB" or "LAB".
-            use_pixel_distance: Whether to include pixel distance in the clustering. If enabled,
-                the image will be extended with pixel coordinates.
-            max_iter: Maximum number of iterations for the MeanShift algorithm.
-
-        Returns:
-            Output image, label image, and lookup table
-        """
-        # convert and load image to numpy
+        # Scale and convert to uint8 for opencv
         np_img = torch2np(image)
         norm_img = convert_to_normalized_colorspace(np_img, color_space)
 
-        # add pixel distance to the image
+        # Add pixel distance to the image
         n_output_channels = 3
         if use_pixel_distance == "enable":
             norm_img = add_pixel_distance_as_channels(norm_img)
             n_output_channels = 5
 
-        # apply clustering to gather labels
-        clustering = SklearnMeanShift(
-            bandwidth=bandwidth, bin_seeding=True, max_iter=max_iter
-        )
+        # Apply clustering to gather labels
+        clustering = SklearnKMeans(n_clusters=n_clusters, max_iter=max_iter)
         labels = clustering.fit_predict(norm_img.reshape(-1, n_output_channels))
 
-        # map labels to colors
+        # Map labels to colors
         mapped_img = clustering.cluster_centers_[labels, :3]
         mapped_img = mapped_img.reshape(np_img.shape)
 
-        # convert back to RGB if needed
+        # Convert back to RGB if needed
         if color_space == "LAB":
             mapped_img = convert_range_to_range(mapped_img, -1, 1, 0.0, 255.0)
-            mapped_img = cv2.cvtColor(mapped_img.astype(np.float32), cv2.COLOR_LAB2RGB)
+            mapped_img = cv.cvtColor(mapped_img.astype(np.float32), cv.COLOR_LAB2RGB)
 
         # convert to torch and return
         output_img = np2torch(mapped_img)
