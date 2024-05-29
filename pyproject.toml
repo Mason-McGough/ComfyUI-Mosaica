@@ -1,7 +1,7 @@
 [project]
 name = "comfyui-mosaica"
 description = "Create colorful mosaic images in ComfyUI by computing label images and applying lookup tables."
-version = "1.0.0"
+version = "1.0.1"
 license = "LICENSE"
 dependencies = ["matplotlib", "scikit-learn"]
 
